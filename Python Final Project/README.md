@@ -8,32 +8,96 @@
 
 
 #### Process :
-- 1 Parse all Emails from raw content.
+- 1 Define a function to get data from yelp api
 ```sh
-def readmailto(path):                                     #mail to
-    with open(path, 'r',encoding='utf-8',errors='ignore') as exa:
-        content = exa.read()
-        email=Parser().parsestr(content)        
-        return(email["to"])
-```        
-- 2 Write function to get all files in folder.
- - use os.walk(path) method to get all files in root directory(root directory contains some child directory )
-```sh
-fns=[os.path.join(root,fn) for root,dirs,files in os.walk(path) for fn in files if fn.endswith(".")]
-print(len(fns))
-```
-- 3 Caculate receiver Email quantities and sort it by rank.
-- output csv files
+url = 'https://api.yelp.com/v3/businesses/search'
+headers={'Authorization': 'bearer %s' % access_token}
+def collectdata(offestlist):
+    for num in offestlist:      
+        params = {'location': 'Chicago',
+                   'term':'Restaurants',
+#            'pricing_filter': '1, 2',
+#              'sort_by': 'rating',
+          'offset':num,
+         'limit':50
+           }
+        r=requests.get(url=url,params=params,headers=headers)
+        writejson(num,r.json()) 
 
-- 4 Choose top receiver to make further analysis
+```        
+- 2 Store data in folder with json file (Each json contains 50 restaurant information)
+
+```sh
+def writejson(offset,r):    
+    with open(os.getcwd()+"/raw data/CH-Restaurant/"+str(offset)+'.json', 'w',encoding='utf-8',errors='ignore') as outfile:
+        json.dump(r, outfile)
 ```
-| Receiver                    |   Quantity | 
-| --------------------------- |:----------:| 
-| richard.shapiro@enron.com   | 15149      | 
-| jeff.dasovich@enron.com     | 14207      |  
-| tana.jones@enron.com        | 12829      |   
-| steven.kean@enron.com       | 12756      |  
-| sara.shackleton@enron.com   | 10341      |  
+- 3 Read all json files and write them to one csv files.
+- Clean data when writing csv in order to further analyzing.
+
+```sh
+def writecsv(x):
+    with open(os.getcwd()+"/restaurant.csv", 'a') as outcsv:      
+        writer=csv.writer(outcsv,delimiter=',', quotechar='|',quoting=csv.QUOTE_MINIMAL, lineterminator='\n')   
+        ree=x["businesses"]
+        for item in ree:
+            c1=item["id"].replace(","," ")
+            c2=item["name"].replace(","," ")
+            c3=item["display_phone"]
+            c4=item["rating"]
+            c5=item["review_count"]
+            if len(item["transactions"])==0:
+                c6=None
+            else:            
+                c6=item["transactions"][0]
+            c7=item["coordinates"]["latitude"]
+            c8=item["coordinates"]["longitude"]
+            c9=item["location"]["city"].replace(","," ")
+            if item["location"]["address1"]==None:
+                c10=None
+            else:
+                c10=item["location"]["address1"].replace(","," ")
+            if item["location"]["address2"]==None:
+                c11=None
+            else:
+                c11=item["location"]["address2"].replace(","," ")
+            if item["location"]["address3"]==None:
+                c12=None
+            else:
+                c12=item["location"]["address3"].replace(","," ")    
+            c13=item["location"]["zip_code"].replace(","," ")
+            c14=item["distance"]
+            if len(item["categories"])>2:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=item["categories"][1]["title"].replace(","," ")
+                c17=item["categories"][2]["title"].replace(","," ")
+            if len(item["categories"])==2:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=item["categories"][1]["title"].replace(","," ")
+                c17=None
+            if len(item["categories"])==1:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=None
+                c17=None  
+            if len(item["categories"])==0:
+                c15=None
+                c16=None
+                c17=None 
+            if 'price' not in item:
+                c18=None
+            else:
+                c18=item['price']
+            writer.writerow([c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18])
+
+```
+
+- 4 Use DateFrame to read csv files.
+```
+	id	name	phone	rating	reviewcount	transactions	latitude	longitude	city	address1	address2	address3	zip_code	distance	categories1	categories2	categories3	price
+0	girl-and-the-goat-chicago	Girl & the Goat	(312) 492-6262	4.5	5896	NaN	41.884105	-87.647944	Chicago	809 W Randolph St	NaN	NaN	60607	3402.031302	American (New)	NaN	NaN	$$$
+1	the-purple-pig-chicago	The Purple Pig	(312) 464-1744	4.0	4904	NaN	41.891020	-87.624562	Chicago	500 N Michigan Ave	NaN	NaN	60611	4675.476777	Tapas/Small Plates	Mediterranean	Wine Bars	$$
+2	the-dearborn-chicago-2	The Dearborn	(312) 384-1242	4.5	280	NaN	41.884258	-87.629397	Chicago	145 N Dearborn St	NaN	NaN	60602	4618.266832	Salad	Seafood	American (Traditional)	$$
+3	au-cheval-chicago	Au Cheval	(312) 929-4580	4.5	3759	NaN	41.884658	-87.647667	Chicago	800 W Randolph St	NaN	NaN	60607	3376.733281	American (New)	Bars	Burgers	$$ 
 ```
 
 #### Analysis 2
