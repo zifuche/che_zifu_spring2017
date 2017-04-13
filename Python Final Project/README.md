@@ -2,7 +2,9 @@
 ### Overview : 
 -  The project applys Yelp API to make three analysis.
 #### Analysis 1
--  Using Enron data-set to list top rank Email receiver and choose import Email Receivers according Enron scandal.
+-  Using Yelp API to get restaurants data from New York, San Francisco, Los Angeles, Boston. 
+-  Analyze and caculate the proportional relation from different categories of restaurants.(Indian food, Thai food)
+-  explore the relation between restaurant category and price.($$ or$$$)
 
 
 #### Process :
