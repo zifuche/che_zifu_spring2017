@@ -1,5 +1,6 @@
-# Midterm Exam - Spring 2017 
-### Question 1 : 
+# Final Project - Spring 2017 
+### Overview : 
+-  The project applys Yelp API to make three analysis.
 #### Analysis 1
 -  Using Enron data-set to list top rank Email receiver and choose import Email Receivers according Enron scandal.
 
