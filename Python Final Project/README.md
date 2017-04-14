@@ -91,14 +91,30 @@ def writecsv(x):
 
 ```
 
-- 4 Use DateFrame to read csv files.
+- 4 Use DateFrame to read csv files and remove duplicated rows(There will be some same restaurants because New Version API).
 ```
-	id	name	phone	rating	reviewcount	transactions	latitude	longitude	city	address1	address2	address3	zip_code	distance	categories1	categories2	categories3	price
-0	girl-and-the-goat-chicago	Girl & the Goat	(312) 492-6262	4.5	5896	NaN	41.884105	-87.647944	Chicago	809 W Randolph St	NaN	NaN	60607	3402.031302	American (New)	NaN	NaN	$$$
-1	the-purple-pig-chicago	The Purple Pig	(312) 464-1744	4.0	4904	NaN	41.891020	-87.624562	Chicago	500 N Michigan Ave	NaN	NaN	60611	4675.476777	Tapas/Small Plates	Mediterranean	Wine Bars	$$
-2	the-dearborn-chicago-2	The Dearborn	(312) 384-1242	4.5	280	NaN	41.884258	-87.629397	Chicago	145 N Dearborn St	NaN	NaN	60602	4618.266832	Salad	Seafood	American (Traditional)	$$
-3	au-cheval-chicago	Au Cheval	(312) 929-4580	4.5	3759	NaN	41.884658	-87.647667	Chicago	800 W Randolph St	NaN	NaN	60607	3376.733281	American (New)	Bars	Burgers	$$ 
+df=pd.read_csv((os.getcwd()+'/restaurant.csv'),low_memory=False)
+dfre=df.drop_duplicates()
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### Analysis 2
 - 1 Analyze important Email Receiver Content and get high frequency word list and output csv.
