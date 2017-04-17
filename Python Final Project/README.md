@@ -97,7 +97,7 @@ df2['price']=df2['price'].replace('$$$$$',5)
 df2.head()
 ```
 
-<img src="img/A1-2.png">
+<img src="img/A1-2.png " width="200" height="200">
 
 Get restaurant quantity for each category(Thai food , French food )
 ```sh
@@ -108,7 +108,7 @@ dfcount.head()
 dd=dfcount.groupby(["categories1"],as_index=False).count()
 
 ```
-<img src="img/A1-3.png" > 
+<img src="img/A1-3.png" width="150" height="150" > 
 
 
 ```sh
