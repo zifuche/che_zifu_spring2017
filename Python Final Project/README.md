@@ -142,10 +142,13 @@ Relationship between Price and Rating
 
 <img src="img/A1-8.png">
 
+#### Conclusion
+   Most people will prefer to offer higher rating to some cheap and fast food shop.
+
 
 #### Analysis 2
 - 1 Analyze important Email Receiver Content and get high frequency word list and output csv.
-- 2 Analyze Email distribution per month and output Graphic.
+
 
 #### Process :
 - 1 Read Email content and get all clean words.
