@@ -4,7 +4,8 @@ Yelp API to make 3 analysis about restaurant.
 
 
 ### Analysis 1
--  
+-  Collecting and Store restaurant data and exploring price and rating factor to restaurant.
+-  Using matlibplot to show result.
 
 #### Process :
 - 1  Apply for yelp api key and collect 7 big city main restaurants data(Chicago,Los angeles,Boston,Hoston,New York,Philadelphia,Seattle) and save them as json files.
@@ -160,29 +161,12 @@ def cleanword(rawcontent):
 ```
 - 2 Caculate Email Distribution per Month.
 ```sh
-def mailquantityofdate(path):                       #mail date
-    with open(path, 'r',encoding='utf-8',errors='ignore') as exa:
-        content=exa.read()
-        email=Parser().parsestr(content)
-        t=parsedate_tz(email["date"])
-        return (str(t[0])+"-"+str(t[1])) 
-emailQuantperMonth=[]
-for path in vippath(vipfilenamelist):
-    allfiles=getallfile(path)    
-    for f in allfiles:
-        emailQuantperMonth.append(mailquantityofdate(f))        
+
+
 ```
 - it will get Email distribution
 ```
-FreqDist({'2001-10': 1263,
-          '2001-11': 937,
-          '2001-12': 380,
-          '2001-7': 10,
-          '2001-8': 6,
-          '2001-9': 593,
-          '2002-1': 129,
-          '2002-2': 101,
-          '2002-3': 107})
+
 
 ```
 - 3 use matplotlib to make graphic 
@@ -235,24 +219,7 @@ def getwordpermonth(date):
 ```
 - 3 output word frequency about important words
 ```
-{'2001-10-first': 5450,
- '2001-10-second': 10764,
- '2001-11-first': 8047,
- '2001-11-second': 2431,
- '2001-12-first': 311,
- '2001-12-second': 581,
- '2001-7-first': 0,
- '2001-7-second': 589,
- '2001-8-first': 5,
- '2001-8-second': 218,
- '2001-9-first': 3248,
- '2001-9-second': 3911,
- '2002-1-first': 89,
- '2002-1-second': 279,
- '2002-2-first': 168,
- '2002-2-second': 139,
- '2002-3-first': 179,
- '2002-3-second': 109}
+
 ```
 ---
 ### Question 2 : 
@@ -272,22 +239,7 @@ def getbooklist(datelist,booktype):
 
 - 2 Analyze book author and title to caculate their times on best seller list.
 ```
-('GONE GIRL', 'Gillian Flynn', 131),
- ('THE GIRL ON THE TRAIN', 'Paula Hawkins', 107),
- ('ALL THE LIGHT WE CANNOT SEE', 'Anthony Doerr', 96),
- ('FIFTY SHADES OF GREY', 'E L James', 93),
- ('THE NIGHTINGALE', 'Kristin Hannah', 76),
- ('FIFTY SHADES DARKER', 'E L James', 74),
- ('A GAME OF THRONES', 'George R R Martin', 68),
- ('FIFTY SHADES FREED', 'E L James', 65),
- ('THE HELP', 'Kathryn Stockett', 60),
- ("THE HUSBAND'S SECRET", 'Liane Moriarty', 60),
- ('ORPHAN TRAIN', 'Christina Baker Kline', 54),
- ('THE GOLDFINCH', 'Donna Tartt', 52),
- ('THE MARTIAN', 'Andy Weir', 50),
- ('THE GIRL WHO KICKED THE HORNET’S NEST', 'Stieg Larsson', 45),
- ('A MAN CALLED OVE', 'Fredrik Backman', 44),
- ('WATER FOR ELEPHANTS', 'Sara Gruen', 41),
+
 ```
 - 3 output csv
 
@@ -301,41 +253,7 @@ def getbooklist(datelist,booktype):
 
 - 2 Get all titles and author information from top 250 book in unfiction book list from 2011 to 2017
 ```
-[('A HIGHER CALL', 'Adam Makos with Larry Alexander'),
- ('ORIGINALS', 'Adam Grant'),
- ('THE GENE', 'Siddhartha Mukherjee'),
- ('THE UNWINDING', 'George Packer'),
- ('TRIBE', 'Sebastian Junger'),
- ('KEEP IT PITHY', "Bill O'Reilly"),
- ('THOSE GUYS HAVE ALL THE FUN', 'James Andrew Miller and Tom Shales'),
- ('RED', 'Sammy Hagar with Joel Selvin'),
- ('CLINTON CASH', 'Peter Schweizer'),
- ('BACK TO WORK', 'Bill Clinton'),
- ("STILL FOOLIN' 'EM", 'Billy Crystal'),
- ('IN THE HEART OF THE SEA', 'Nathaniel Philbrick'),
- ('OUR REVOLUTION', 'Bernie Sanders'),
- ('THE LOST CITY OF THE MONKEY GOD', 'Douglas Preston'),
- ('THE DAILY SHOW (THE BOOK)', 'Chris Smith'),
- ('THE IMMORTAL IRISHMAN', 'Timothy Egan'),
- ('TALKING AS FAST AS I CAN', 'Lauren Graham'),
- ('DREAMERS AND DECEIVERS', 'Glenn Beck with Kevin Balfe'),
- ("OBAMA'S AMERICA", "Dinesh D'Souza"),
- ('DOUBLE CROSS', 'Ben Macintyre'),
- ('BUTLER', 'Wil Haygood'),
- ('SULLY', 'Chesley B Sullenberger III with Jeffrey Zaslow'),
- ('LIGHTS OUT', 'Ted Koppel'),
- ('VALIANT AMBITION', 'Nathaniel Philbrick'),
- ('A SPY AMONG FRIENDS', 'Ben Macintyre'),
- ('HOW TO BE A WOMAN', 'Caitlin Moran'),
- ('MRS. KENNEDY AND ME', 'Clint Hill'),
- ('COWARDS', 'Glenn Beck and Kevin Balfe'),
- ('IT IS ABOUT ISLAM', 'Glenn Beck'),
- ('THE PRICE OF POLITICS', 'Bob Woodward'),
- ('THE BILLION DOLLAR SPY', 'David E Hoffman'),
- ('A MORE PERFECT UNION', 'Ben Carson with Candy Carson'),
- ('BINGE', 'Tyler Oakley'),
- ('PHYSICS OF THE FUTURE', 'Michio Kaku'),
- ('SPQR', 'Mary Beard'),.......]
+
 
 
 ```
@@ -372,34 +290,7 @@ for pub in allpublisher:
 ('Random House', 20),
  ('Simon & Schuster', 15),
  ('Little  Brown', 14),
- ('HarperCollins ', 12),
- ('Holt', 11),
- ('Threshold', 11),
- ('Morrow', 9),
- ('Back Bay', 8),
- ('Penguin', 7),
- ('Broadway', 7),
- ('Grand Central', 6),
- ('Scribner', 6),
- ('Mercury Radio Arts', 6),
- ('Anchor', 6),
- ('Regnery', 6),
- ('Vintage', 6),
- ("St. Martin's", 5),
- ('Norton', 5),
- ('Houghton Mifflin Harcourt', 4),
- ('Farrar  Straus & Giroux', 4),
- ('Knopf', 4),
- ('Doubleday', 4),
- ('Gallery Books', 4),
- ('Spiegel & Grau', 4),
- ('Twelve', 3),
- ('Sentinel', 3),
- ('Viking', 3),
- ('Harper', 3),
- ('Crown Archetype', 3),
- ('Dey Street', 2),
- ('Flatiron', 2),.....]
+
 
 
 
@@ -432,55 +323,7 @@ typedistrbution
 ```
 
 ```
-('News', 0.4880685511671427),
- ('Blog', 0.17659804983748645),
- ('Review', 0.055333398995370826),
- ('Brief', 0.04230473751600512),
- ('Op-Ed', 0.03611149413966316),
- ('Video', 0.03540628385698808),
- ('Slideshow', 0.03221116911257756),
- ('Interactive Feature', 0.024816310450113267),
- ('Letter', 0.021061755146262188),
- ('Paid Death Notice', 0.01882005318625037),
- ('Editorial', 0.014967004826159756),
- ('Schedule', 0.012441642864178076),
- ('Obituary', 0.010849995075347188),
- ('Question', 0.007430316162710529),
- ('List', 0.004574017531764011),
- ('Quote', 0.003912144193834335),
- ('briefing', 0.003723037525854427),
- ('Obituary (Obit)', 0.0025332414064808432),
- ('Special Report', 0.0024111100167438196),
- ('An Analysis; News Analysis', 0.002265340293509308),
- ('Interview', 0.0009140155619028859),
- ('Correction', 0.0005476213926918152),
- ('Biography', 0.0005042844479464198),
- ('recipe', 0.0003742736137102334),
- ('Text', 0.0003624544469614892),
- ('News Analysis', 0.0002718408352211169),
- ('Web Log', 0.00024032305722446567),
- (None, 0.00019698611247907023),
- ('An Appraisal', 0.00018910666797990742),
- ('Letter; Editorial', 0.0001733477789815818),
- ('Caption', 0.00010243277848911651),
- ('Op-Ed; Editorial', 5.9095833743721065e-05),
- ('An Analysis; Economic Analysis', 4.7276666994976855e-05),
- ('Summary', 3.9397222495814046e-05),
- ('Recipe', 3.1517777996651236e-05),
- ('An Analysis', 2.7578055747069832e-05),
- ('Series', 1.9698611247907023e-05),
- ('An Analysis; Military Analysis', 1.1819166748744214e-05),
- ('First Chapter', 7.879444499162809e-06),
- ('Addendum', 7.879444499162809e-06),
- ('Newsletter', 7.879444499162809e-06),
- ('Op-Ed; Correction', 3.9397222495814046e-06),
- ('Op-Ed; Biography', 3.9397222495814046e-06),
- ("Editors' Note", 3.9397222495814046e-06),
- ('An Analysis; Review', 3.9397222495814046e-06),
- ('Op-Ed; Review', 3.9397222495814046e-06),
- ('Letter; Biography', 3.9397222495814046e-06)]
 
-```
 - 3 output csv
 
 
