@@ -1,26 +1,89 @@
-# Midterm Exam - Spring 2017 
-### Question 1 : 
-#### Analysis 1
--  Using Enron data-set to list top rank Email receiver and choose import Email Receivers according Enron scandal.
+# Final Exam - Spring 2017 
+## Overview:
+Yelp API to make 3 analysis about restaurant.  
 
+
+### Analysis 1
+-  
 
 #### Process :
-- 1 Parse all Emails from raw content.
+- 1  Apply for yelp api key and collect 7 big city main restaurants data(Chicago,Los angeles,Boston,Hoston,New York,Philadelphia,Seattle) and save them as json files.
 ```sh
-def readmailto(path):                                     #mail to
-    with open(path, 'r',encoding='utf-8',errors='ignore') as exa:
-        content = exa.read()
-        email=Parser().parsestr(content)        
-        return(email["to"])
+def collectdata(offestlist):
+    for num in offestlist:      
+        params = {'location': 'Houston',
+                   'term':'Restaurants',
+          'offset':num,
+         'limit':50
+           }
+        r=requests.get(url=url,params=params,headers=headers)
+        writejson(num,r.json())
 ```        
-- 2 Write function to get all files in folder.
- - use os.walk(path) method to get all files in root directory(root directory contains some child directory )
+- 2 Read restaurant data and write them to one csv file
+ 
 ```sh
-fns=[os.path.join(root,fn) for root,dirs,files in os.walk(path) for fn in files if fn.endswith(".")]
-print(len(fns))
+def writecsv(x):
+    with open(os.getcwd()+"/restaurant.csv", 'a') as outcsv:      
+        writer=csv.writer(outcsv,delimiter=',', quotechar='|',quoting=csv.QUOTE_MINIMAL, lineterminator='\n')   
+        ree=x["businesses"]
+        for item in ree:
+            c1=item["id"].replace(","," ")
+            c2=item["name"].replace(","," ")
+            c3=item["display_phone"]
+            c4=item["rating"]
+            c5=item["review_count"]
+            if len(item["transactions"])==0:
+                c6=None
+            else:            
+                c6=item["transactions"][0]
+            c7=item["coordinates"]["latitude"]
+            c8=item["coordinates"]["longitude"]
+            c9=item["location"]["city"].replace(","," ")
+            if item["location"]["address1"]==None:
+                c10=None
+            else:
+                c10=item["location"]["address1"].replace(","," ")
+            if item["location"]["address2"]==None:
+                c11=None
+            else:
+                c11=item["location"]["address2"].replace(","," ")
+            if item["location"]["address3"]==None:
+                c12=None
+            else:
+                c12=item["location"]["address3"].replace(","," ")    
+            c13=item["location"]["zip_code"].replace(","," ")
+            c14=item["distance"]
+            if len(item["categories"])>2:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=item["categories"][1]["title"].replace(","," ")
+                c17=item["categories"][2]["title"].replace(","," ")
+            if len(item["categories"])==2:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=item["categories"][1]["title"].replace(","," ")
+                c17=None
+            if len(item["categories"])==1:
+                c15=item["categories"][0]["title"].replace(","," ")
+                c16=None
+                c17=None  
+            if len(item["categories"])==0:
+                c15=None
+                c16=None
+                c17=None 
+            if 'price' not in item:
+                c18=None
+            else:
+                c18=item['price']
+            writer.writerow([c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18])
 ```
-- 3 Caculate receiver Email quantities and sort it by rank.
-- output csv files
+- 3 User pandas module to read csv file and remove duplicating restaurant information.(restaurant.csv)
+
+
+
+
+
+
+
+
 
 - 4 Choose top receiver to make further analysis
 ```
