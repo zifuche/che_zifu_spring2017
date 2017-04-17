@@ -133,11 +133,17 @@ df_rpq.head()
 Using df.query() to select dataframe
 
 ```sh
-df_rpq=pd.merge(dd,df4,on='categories1')
-df_rpq.head()
+df_ByQu=df_rpq.sort_values(["Quantity"],ascending=[False])
+
+df_result=df_ByQu.query('Quantity>20')
+df_result.head()
+
+
 ```
 
 <img src="img/A1-6.png">
+
+
 
 - Restaurant Category OverView from 7 Big City
 <img src="img/A1-7.png">
