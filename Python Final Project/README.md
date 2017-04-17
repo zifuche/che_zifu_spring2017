@@ -97,7 +97,7 @@ df2['price']=df2['price'].replace('$$$$$',5)
 df2.head()
 ```
 
-<img src="img/A1-2.png " width="200" height="200">
+<img src="img/A1-2.png " width="300" height="200">
 
 Get restaurant quantity for each category(Thai food , French food )
 ```sh
@@ -108,14 +108,14 @@ dfcount.head()
 dd=dfcount.groupby(["categories1"],as_index=False).count()
 
 ```
-<img src="img/A1-3.png" width="150" height="150" > 
+<img src="img/A1-3.png" width="300" height="200" > 
 
 
 ```sh
 df4=df2.groupby(["categories1"],as_index=False).mean()
 df4.head()
 ```
-<img src="img/A1-4.png">
+<img src="img/A1-4.png" width="300" height="200">
 
 
 
@@ -127,7 +127,7 @@ df_rpq=pd.merge(dd,df4,on='categories1')
 df_rpq.head()
 
 ```
-<img src="img/A1-5.png">
+<img src="img/A1-5.png" width="300" height="200">
 
 - 5 Further analyzing and selecting those restaurant categories that are more than 20 and make show with matplotlib.
 Using df.query() to select dataframe
@@ -141,7 +141,7 @@ df_result.head()
 
 ```
 
-<img src="img/A1-6.png">
+<img src="img/A1-6.png" width="300" height="200">
 
 
 
