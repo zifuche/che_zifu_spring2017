@@ -78,34 +78,43 @@ def writecsv(x):
 ```
 - 3 User pandas module to read csv file and remove duplicating restaurant information.(restaurant.csv)
 
-<img >
+```sh
+df=pd.read_csv((os.getcwd()+'/restaurant.csv'),low_memory=False)
+df=df.drop_duplicates()
+df.head()
+```
 
-
-
-
-
-
+<img src="img/A1-1.png">
 
 - 4 Quantizating price with number and Caculating average price and rating for each category of restaurant.
+Replace $ with 1....
 ```sh
 df2['price']=df2['price'].replace('$$',2)
 df2['price']=df2['price'].replace('$',1)
 df2['price']=df2['price'].replace('$$$',3)
 df2['price']=df2['price'].replace('$$$$',4)
 df2['price']=df2['price'].replace('$$$$$',5)
+df2.head()
+```
+<img src="img/A1-2.png">
+
+Get restaurant quantity for each category(Thai food , French food )
+```sh
+df3=df2.copy()
+df3['Quantity']=1
 dfcount=df3[["categories1","Quantity"]]
 dfcount.head()
 dd=dfcount.groupby(["categories1"],as_index=False).count()
 
-
 ```
+<img src="img/A1-3.png" > 
 
 
 ```sh
 df4=df2.groupby(["categories1"],as_index=False).mean()
 df4.head()
 ```
-
+<img src="img/A1-4.png">
 
 
 
@@ -114,14 +123,24 @@ merge two dataframe
 df_rpq=pd.merge(dd,df4,on='categories1')
 df_rpq.head()
 
+```
+<img src="img/A1-5.png">
+- 5 Further analyzing and selecting those restaurant categories that are more than 20 and make show with matplotlib.
+Using df.query() to select dataframe
+```sh
+df_rpq=pd.merge(dd,df4,on='categories1')
+df_rpq.head()
 
 ```
-- 4 Quantizating price with number and Caculating average price and rating for each category of restaurant.
+<img src="img/A1-6.png">
+
+Restaurant Category OverView from 7 Big City
+<img src="img/A1-7.png">
 
 
+Relationship between Price and Rating
 
-
-
+<img src="img/A1-8.png">
 
 
 #### Analysis 2
