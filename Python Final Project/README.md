@@ -77,6 +77,7 @@ def writecsv(x):
 ```
 - 3 User pandas module to read csv file and remove duplicating restaurant information.(restaurant.csv)
 
+<img >
 
 
 
@@ -84,17 +85,43 @@ def writecsv(x):
 
 
 
+- 4 Quantizating price with number and Caculating average price and rating for each category of restaurant.
+```sh
+df2['price']=df2['price'].replace('$$',2)
+df2['price']=df2['price'].replace('$',1)
+df2['price']=df2['price'].replace('$$$',3)
+df2['price']=df2['price'].replace('$$$$',4)
+df2['price']=df2['price'].replace('$$$$$',5)
+dfcount=df3[["categories1","Quantity"]]
+dfcount.head()
+dd=dfcount.groupby(["categories1"],as_index=False).count()
 
-- 4 Choose top receiver to make further analysis
+
 ```
-| Receiver                    |   Quantity | 
-| --------------------------- |:----------:| 
-| richard.shapiro@enron.com   | 15149      | 
-| jeff.dasovich@enron.com     | 14207      |  
-| tana.jones@enron.com        | 12829      |   
-| steven.kean@enron.com       | 12756      |  
-| sara.shackleton@enron.com   | 10341      |  
+
+
+```sh
+df4=df2.groupby(["categories1"],as_index=False).mean()
+df4.head()
 ```
+
+
+
+
+merge two dataframe 
+```sh
+df_rpq=pd.merge(dd,df4,on='categories1')
+df_rpq.head()
+
+
+```
+- 4 Quantizating price with number and Caculating average price and rating for each category of restaurant.
+
+
+
+
+
+
 
 #### Analysis 2
 - 1 Analyze important Email Receiver Content and get high frequency word list and output csv.
