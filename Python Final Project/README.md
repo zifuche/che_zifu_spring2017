@@ -178,7 +178,7 @@ df.head()
 df2['lat_long']=df2[["latitude","longitude"]].apply(tuple,axis=1)
 df2.head()
 ```
-<img src="img/A2-2.png" width="300" height="200">
+<img src="img/A2-2.png" width="500" height="200">
 
 - 3 Classifing restaurants according to price level. 
 
