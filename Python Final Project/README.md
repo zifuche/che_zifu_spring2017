@@ -160,7 +160,71 @@ df_result.head()
    Most people will prefer to offer higher rating to some cheap and fast food shop.
 
 
-#### Analysis 2
-- 1 Analyze important Email Receiver Content and get high frequency word list and output csv.
+### Analysis 2
+- plotting real NewYork Map according to different price rating.
+
+#### Main Process :
+- 1 get all New York json files and write them to csv file. Read newyork restaurant.csv.
+```sh
+df=pd.read_csv((os.getcwd()+'/NY-restaurant.csv'),low_memory=False)
+df=df.drop_duplicates()
+df.head()
+```
+<img src="img/A2-1.png">
+
+- 2 cleaning data and combining latitude and longitude 
+
+```sh
+df2['lat_long']=df2[["latitude","longitude"]].apply(tuple,axis=1)
+df2.head()
+```
+<img src="img/A2-2.png" width="300" height="200">
+
+- 3 Classifing restaurants according to price level. 
+
+```sh
+
+df_1star=df2.query("price=='$'")
+df_2star=df2.query("price=='$$'")
+df_3star=df2.query("price=='$$$'")
+df_4star=df2.query("price=='$$$$'")
+list1=df_1star['lat_long'].values.tolist()
+list2=df_2star['lat_long'].values.tolist()
+list3=df_3star['lat_long'].values.tolist()
+list4=df_4star['lat_long'].values.tolist()
+
+```
+
+- 4 Using folium package to marking the New York map. Different color means different price level.($:blue $$:red $$$:green  $$$$:yellow )
+
+```sh
+lat = +40.7128
+lon = -74.0059
+zoom_start = 14
+
+m = folium.Map(location=[lat, lon], zoom_start=zoom_start)
+
+def plotmap(l1,l2,l3,l4,m):
+    kw = dict(fill_color='blue', radius=3)
+    kw1=dict(fill_color='red', radius=3)
+    kw2=dict(fill_color='green', radius=3)
+    kw3=dict(fill_color='yellow', radius=3)
+    for ll in l1:
+        c=folium.CircleMarker([ll[0], ll[1]], **kw)
+        m.add_child(c)
+    for ll in l2:
+        c=folium.CircleMarker([ll[0], ll[1]], **kw1)
+        m.add_child(c)
+    for ll in l3:
+        c=folium.CircleMarker([ll[0], ll[1]], **kw2)
+        m.add_child(c)
+    for ll in l4:
+        c=folium.CircleMarker([ll[0], ll[1]], **kw3)
+        m.add_child(c)    
+    m.save('Restaurant.html') 
+    return m
+
+```
+<img src="img/A2-3.png" >
 
 
