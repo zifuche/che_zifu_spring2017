@@ -227,4 +227,78 @@ def plotmap(l1,l2,l3,l4,m):
 ```
 <img src="img/A2-3.png" >
 
+### Analysis 3
+- Analyzing restaurant review data and exploring people's attention to restaurant-- place,food,service.
 
+#### Main Process :
+- 1 get all New York json files and write them to csv file. Read newyork restaurant.csv.
+```sh
+df=pd.read_csv((os.getcwd()+'/restaurant.csv'),low_memory=False)
+df=df.drop_duplicates()
+
+df.head()
+```
+<img src="img/A3-1.png">
+
+- 2 get all restaurants that reviews are more than 300
+```sh
+df_byrating=df1.sort_values(["rating"],ascending=[False])
+df_ana=df_byrating.query('reviewcount>300')
+df_ana.head()
+```
+<img src="img/A3-2.png" width="300" height="200">
+
+- 3 using yelp review api to get review of all restaurants. Store them as json files.
+```sh
+
+def get_chunks2(MyList, n):
+    return [MyList[x:x+n] for x in range(0, len(MyList), n)]
+
+def writejson(name,r):    
+    with open(os.getcwd()+"/raw data/Restaurant_Review/"+name+'.json', 'w',encoding='utf-8',errors='ignore') as outfile:
+        json.dump(r, outfile)
+
+def combineReviewJson():
+    list1=get_chunks2(Idlist, 20)
+    for li in list1:
+        reviewdict={}
+        review=[]
+        for l in li:
+            url = 'https://api.yelp.com/v3/businesses/'+l+'/reviews'
+            r=requests.get(url=url,headers=headers)
+            review.extend(r.json()["reviews"])
+        reviewdict["reviews"]=review
+        writejson(l[0]+l[1]+l[2]+l[3]+l[4],reviewdict)
+
+```
+
+- 4 Using NLTK method to clean review data and store them by ratings(5,4,3,2,1)
+
+```sh
+def getstarreview(path,star):
+    wordlist=[]
+    dic=readjson(path)["reviews"]
+    for eachrest in dic:
+        if eachrest["rating"]==star:
+            wordlist.extend(cleanword(eachrest["text"]))
+    return wordlist 
+
+
+```
+- 5 make word frequency according different star review(rating:5 rating:4 ..... ) and output dataframe
+
+<img src="img/A3-3.png">
+
+- 6 make fig with matplotlib 
+
+
+<img src="img/A3-4.png">
+
+
+- 7 make word cloud
+
+<img src="img/A3-5.png">
+
+#### Conclusion
+ 
+ The analysis provides restaurant with some advices. Customers prefer to give 5 star rating when place is good. The second is food. The third is service. 
