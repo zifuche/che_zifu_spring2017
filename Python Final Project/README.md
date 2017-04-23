@@ -301,4 +301,4 @@ def getstarreview(path,star):
 
 #### Conclusion
  
- The distribution bar chart above shows the concerning extent of customer. The analysis provides restaurant with some advices. At the most time, customers prefer to give 5 star rating when place is good. The second is food. The third is service. For high rating level, environment seems more important.
+ The distribution bar chart above shows the concerning extent of customer. The analysis provides restaurant with some advices. At the most time, customers prefer to give 5 star rating when place is good. The second is food. The third is service. For high rating level, a clean and good place for dinner seems more important.
