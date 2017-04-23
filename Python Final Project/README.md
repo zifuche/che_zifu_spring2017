@@ -297,7 +297,7 @@ def getstarreview(path,star):
 
 - 7 make word cloud
 
-<img src="img/A3-5.png">
+<img src="img/A3-5.png" height="500" width="500">
 
 #### Conclusion
  
