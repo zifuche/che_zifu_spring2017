@@ -246,7 +246,7 @@ df_byrating=df1.sort_values(["rating"],ascending=[False])
 df_ana=df_byrating.query('reviewcount>300')
 df_ana.head()
 ```
-<img src="img/A3-2.png" width="300" height="200">
+<img src="img/A3-2.png" width="400" height="200">
 
 - 3 using yelp review api to get review of all restaurants. Store them as json files.
 ```sh
@@ -287,7 +287,7 @@ def getstarreview(path,star):
 ```
 - 5 make word frequency according different star review(rating:5 rating:4 ..... ) and output dataframe
 
-<img src="img/A3-3.png">
+<img src="img/A3-3.png" height="200" width="300">
 
 - 6 make fig with matplotlib 
 
@@ -301,4 +301,4 @@ def getstarreview(path,star):
 
 #### Conclusion
  
- The analysis provides restaurant with some advices. Customers prefer to give 5 star rating when place is good. The second is food. The third is service. 
+ The distribution bar chart above shows the concerning extent of customer. The analysis provides restaurant with some advices. At the most time, customers prefer to give 5 star rating when place is good. The second is food. The third is service. For high rating level, environment seems more important.
